@@ -1,73 +1,213 @@
-# React + TypeScript + Vite
+# Modern React Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, modern portfolio website built with React, TypeScript, and Tailwind CSS. Features smooth animations, responsive design, and email functionality.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Modern Design**: Glassmorphism effects with gradient backgrounds
+- **Responsive**: Fully responsive across all devices
+- **Interactive**: Smooth animations and micro-interactions
+- **Email Integration**: Contact form with EmailJS integration
+- **TypeScript**: Fully typed for better development experience
+- **Performance**: Optimized with Vite and modern React patterns
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend**: React 19, TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Forms**: React Hook Form
+- **Email**: EmailJS
+- **Icons**: Lucide React
+- **Build Tool**: Vite
 
-## Expanding the ESLint configuration
+## 📋 Sections
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Hero**: Dynamic typing animation, social links, call-to-action
+2. **About**: Personal introduction, experience highlights, statistics
+3. **Skills**: Interactive skill visualization with progress bars
+4. **Projects**: Project showcase with filtering and hover effects
+5. **Contact**: Contact form with email sending functionality
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Prerequisites
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/portfolio.git
+cd portfolio
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### EmailJS Setup
+
+To enable the contact form functionality:
+
+1. Create an account at [EmailJS](https://www.emailjs.com/)
+
+2. Create a new email service (Gmail, Outlook, etc.)
+
+3. Create an email template with these variables:
+   - `{{from_name}}` - Sender's name
+   - `{{from_email}}` - Sender's email
+   - `{{subject}}` - Email subject
+   - `{{message}}` - Email message
+   - `{{to_name}}` - Your name
+
+4. Update the EmailJS configuration in `src/components/ContactSection.tsx`:
+```typescript
+const serviceId = 'your_service_id';
+const templateId = 'your_template_id';
+const publicKey = 'your_public_key';
+```
+
+## 🎨 Customization
+
+### Personal Information
+
+Update the following files with your personal information:
+
+- **Hero Section** (`src/components/HeroSection.tsx`):
+  - Name, title, and description
+  - Social media links
+  - Profile image/emoji
+
+- **About Section** (`src/components/AboutSection.tsx`):
+  - Personal description and experience
+  - Statistics and highlights
+
+- **Contact Section** (`src/components/ContactSection.tsx`):
+  - Contact information (email, phone, location)
+  - Social media links
+
+### Projects
+
+Update the projects array in `src/components/ProjectsSection.tsx`:
+
+```typescript
+const projects = [
+  {
+    id: 1,
+    title: "Your Project Title",
+    description: "Project description...",
+    image: "🛒", // Emoji or image URL
+    technologies: ["Tech1", "Tech2", "Tech3"],
+    category: "fullstack", // fullstack, frontend, backend, other
+    github: "https://github.com/your-project",
+    live: "https://your-project.com",
+    featured: true // Set to true for featured projects
+  },
+  // Add more projects...
+];
+```
+
+### Skills
+
+Customize the skills in `src/components/SkillsSection.tsx`:
+
+```typescript
+const skillCategories = [
+  {
+    title: "Your Skill Category",
+    icon: "🎯",
+    color: "from-blue-500 to-cyan-500",
+    skills: [
+      {
+        name: "Skill Name",
+        level: 95, // 0-100
+        description: "Skill description"
+      },
+      // Add more skills...
+    ]
+  },
+  // Add more categories...
+];
+```
+
+### Styling
+
+The design uses Tailwind CSS. Key color variables:
+- Primary gradient: `from-purple-500 to-pink-500`
+- Background gradient: `from-purple-900 via-blue-900 to-indigo-900`
+- Accent colors: Various gradient combinations
+
+## 📱 Responsive Design
+
+The portfolio is fully responsive with breakpoints:
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+## 🚀 Deployment
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+### Deploy to Netlify/Vercel
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Upload the `dist` folder to your hosting platform.
+
+### Environment Variables
+
+For production, consider using environment variables for EmailJS credentials:
+
+```bash
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
+```
+
+## 📄 Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🙏 Acknowledgments
+
+- [Framer Motion](https://www.framer.com/motion/) for animations
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [EmailJS](https://www.emailjs.com/) for email functionality
+- [Lucide](https://lucide.dev/) for icons
+
+---
+
+**Made with ❤️ using React & TypeScript**
