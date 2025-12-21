@@ -93,13 +93,13 @@ export default function ContactSection() {
       icon: <Mail className="w-6 h-6" />,
       title: "Email",
       value: "lordyschofield@gmail.com",
-      href: "mailto:your.email@example.com"
+      href: "mailto:lordyschofield@gmail.com"
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Phone",
       value: "+63 968 542 7267",
-      href: "tel:+15551234567"
+      href: "tel:+639685427267"
     },
     {
       icon: <MapPin className="w-6 h-6" />,
