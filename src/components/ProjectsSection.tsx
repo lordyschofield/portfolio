@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ExternalLink, Github } from 'lucide-react';
 
 export default function ProjectsSection() {
   const ref = useRef(null);
