@@ -30,17 +30,27 @@
 
     "@emailjs/browser": "^4.4.1",
 
+    "@mlc-ai/web-llm": "^0.2.80",
+
     "@tailwindcss/vite": "^4.1.18",
+
+    "@types/react-router-dom": "^5.3.3",
+
+    "dotenv": "^17.2.3",
 
     "framer-motion": "^12.23.26",
 
     "lucide-react": "^0.562.0",
+
+    "openai": "^6.15.0",
 
     "react": "^19.2.0",
 
     "react-dom": "^19.2.0",
 
     "react-hook-form": "^7.69.0",
+
+    "react-router-dom": "^7.11.0",
 
     "tailwindcss": "^4.1.18"
 
