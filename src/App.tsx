@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import SkillsSection from './components/SkillsSection';
 import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
+import ProjectDetail from './components/ProjectDetail';
 import Navigation from './components/Navigation';
+import Chatbot from './components/Chatbot';
 
-export default function App() {
+// Main Portfolio Component (without router)
+function Portfolio() {
   const [activeSection, setActiveSection] = useState('hero');
   const { scrollYProgress } = useScroll();
   const backgroundY = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -78,6 +82,9 @@ export default function App() {
         <ContactSection />
       </main>
 
+      {/* Chatbot */}
+      <Chatbot />
+
       {/* Floating Elements */}
       <div className="fixed inset-0 pointer-events-none -z-10">
         {[...Array(20)].map((_, i) => (
@@ -101,5 +108,17 @@ export default function App() {
         ))}
       </div>
     </div>
+  );
+}
+
+// Main App Component with Router
+export default function App() {
+  return (
+    <Router basename="/portfolio">
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/project/:id" element={<ProjectDetail />} />
+      </Routes>
+    </Router>
   );
 }

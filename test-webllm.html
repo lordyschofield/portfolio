@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebLLM Test</title>
+</head>
+<body>
+    <h1>WebLLM Test</h1>
+    <div id="status">Initializing WebLLM...</div>
+    <button id="testBtn">Test AI Response</button>
+    <div id="response"></div>
+
+    <script type="module">
+        import { CreateMLCEngine } from 'https://esm.run/@mlc-ai/web-llm';
+
+        let engine = null;
+        const statusDiv = document.getElementById('status');
+        const testBtn = document.getElementById('testBtn');
+        const responseDiv = document.getElementById('response');
+
+        async function initWebLLM() {
+            const modelsToTry = [
+                'vicuna-v1-7b',
+                'Llama-2-7b-chat-hf-q4f16_1',
+                'Mistral-7B-Instruct-v0.1-q4f16_1'
+            ];
+
+            for (const modelName of modelsToTry) {
+                try {
+                    statusDiv.textContent = `Loading ${modelName}...`;
+
+                    engine = await CreateMLCEngine(modelName, {
+                        initProgressCallback: (progress) => {
+                            statusDiv.textContent = `Loading ${modelName}: ${(progress.progress * 100).toFixed(1)}%`;
+                        }
+                    });
+
+                    statusDiv.textContent = `WebLLM Ready with ${modelName}!`;
+                    testBtn.disabled = false;
+                    return;
+
+                } catch (error) {
+                    statusDiv.textContent = `${modelName} failed, trying next...`;
+                    console.error(`${modelName} failed:`, error);
+                }
+            }
+
+            statusDiv.textContent = 'All models failed. Check console for details.';
+        }
+
+        testBtn.addEventListener('click', async () => {
+            if (!engine) return;
+
+            try {
+                responseDiv.textContent = 'Generating response...';
+
+                const reply = await engine.chat.completions.create({
+                    messages: [{ role: 'user', content: 'Hello! Tell me about yourself.' }],
+                    temperature: 0.7,
+                    max_tokens: 128
+                });
+
+                const content = reply.choices[0]?.message?.content || 'No response';
+                responseDiv.textContent = `AI Response: ${content}`;
+
+            } catch (error) {
+                responseDiv.textContent = `Error: ${error.message}`;
+            }
+        });
+
+        initWebLLM();
+    </script>
+</body>
+</html>

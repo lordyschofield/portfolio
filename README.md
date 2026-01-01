@@ -7,6 +7,7 @@ A sleek, modern portfolio website built with React, TypeScript, and Tailwind CSS
 - **Modern Design**: Glassmorphism effects with gradient backgrounds
 - **Responsive**: Fully responsive across all devices
 - **Interactive**: Smooth animations and micro-interactions
+- **AI Chatbot**: Intelligent assistant powered by Together AI
 - **Email Integration**: Contact form with EmailJS integration
 - **TypeScript**: Fully typed for better development experience
 - **Performance**: Optimized with Vite and modern React patterns
@@ -16,6 +17,7 @@ A sleek, modern portfolio website built with React, TypeScript, and Tailwind CSS
 - **Frontend**: React 19, TypeScript
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
+- **AI Chatbot**: WebLLM (Local AI in Browser - 100% Free)
 - **Forms**: React Hook Form
 - **Email**: EmailJS
 - **Icons**: Lucide React
@@ -28,6 +30,32 @@ A sleek, modern portfolio website built with React, TypeScript, and Tailwind CSS
 3. **Skills**: Interactive skill visualization with progress bars
 4. **Projects**: Project showcase with filtering and hover effects
 5. **Contact**: Contact form with email sending functionality
+
+## 🤖 AI Chatbot (WebLLM)
+
+This portfolio features an **intelligent AI chatbot** powered by **WebLLM** that runs entirely in the browser:
+
+### 🎯 How It Works
+- **Local AI**: Uses WebLLM to run AI models directly in your browser
+- **No External APIs**: Completely self-contained, no server dependencies
+- **100% Free**: No API keys, subscriptions, or costs required
+- **GitHub Pages Compatible**: Works perfectly on static hosting
+
+### 🧠 AI Capabilities
+- **Comprehensive Profile**: Complete knowledge of Lord Reinier's background, education, experience, and achievements
+- **Professional History**: Detailed information about INGCOPH Traders role and McDonald's service experience
+- **Technical Expertise**: In-depth knowledge of full-stack development skills and technologies
+- **Project Portfolio**: Complete details about all major projects and systems developed
+- **Personal Details**: Education, contact information, awards, and character references
+- **Conversational AI**: Natural, helpful responses to any questions about Lord Reinier's background
+
+### 🔧 Technical Implementation
+- **Model**: TinyLlama-1.1B-Chat-v0.4 (700MB) - Official WebLLM model
+- **Loading Time**: Pre-cached on page load (instant chat!), 30-45 seconds first visit
+- **Local AI**: Runs entirely in browser using WebAssembly/WebGPU
+- **Smart Caching**: Model loads in background when page opens
+- **Instant Chat**: AI ready immediately after pre-loading completes
+- **Fallback**: On-demand loading if pre-cache fails
 
 ## 🚀 Getting Started
 
@@ -77,6 +105,62 @@ const serviceId = 'your_service_id';
 const templateId = 'your_template_id';
 const publicKey = 'your_public_key';
 ```
+
+### AI Chatbot Setup (Optional)
+
+The portfolio includes an **intelligent conversational AI chatbot** that provides **instant, context-aware responses** about Lord Reinier's portfolio!
+
+#### 🚀 **No Setup Required!**
+
+**The AI chatbot works out-of-the-box with zero configuration!**
+
+- ✅ **Completely free** - No API keys, no costs, no signup
+- ✅ **Runs locally** - AI model loads in your browser
+- ✅ **Works offline** - Once loaded, no internet needed
+- ✅ **GitHub Pages compatible** - No server required
+
+#### 💰 **WebLLM Pricing**
+
+- **100% FREE** - No costs ever
+- **No API keys required** - Everything built-in
+- **No rate limits** - Runs on your device
+- **Privacy focused** - Conversations stay local
+
+#### 🧠 **How It Works**
+
+1. **WebLLM loads AI model** - Tries Llama-2-7B, Mistral-7B, or Phi-2 automatically
+2. **Context-aware responses** - Knows about Lord Reinier's portfolio
+3. **Intelligent conversations** - Natural, helpful responses
+4. **Smart fallbacks** - Works immediately while model loads
+
+#### ⚡ **AI Capabilities**
+
+The chatbot can intelligently answer questions about:
+- Lord Reinier's experience and background
+- Technical skills and proficiency levels
+- Project portfolio and detailed case studies
+- Technology stack and expertise areas
+- Career highlights and professional journey
+- Contact information and collaboration opportunities
+
+#### 🧪 **Test Your AI Chatbot**
+
+1. **No setup needed** - Works immediately
+2. **Run locally**: `npm run dev`
+3. **Open**: http://localhost:5173/portfolio/
+4. **Click chat button** and ask: "Tell me about Lord Reinier"
+5. **First time**: Wait ~30 seconds for AI model to load
+6. **After loading**: Get instant AI responses!
+
+#### 🎯 **Features**
+
+- ✅ **Works on GitHub Pages** deployment
+- ✅ **Powered by Llama-3-8B** (professional AI model)
+- ✅ **Context-aware responses** about your portfolio
+- ✅ **100% Free** - No costs or API keys ever
+- ✅ **Runs locally** - Private and secure
+
+**Your portfolio now has true AI conversations running directly in visitors' browsers!** 🤖✨
 
 ## 🎨 Customization
 
@@ -157,13 +241,26 @@ The portfolio is fully responsive with breakpoints:
 
 ## 🚀 Deployment
 
-### Build for Production
+### Deploy to GitHub Pages with AI Chatbot
 
+1. **Setup OpenAI API**:
+```bash
+# Get your API key from: https://platform.openai.com/api-keys
+VITE_OPENAI_API_KEY=sk-your-openai-api-key-here
+```
+
+2. **Build for production**:
 ```bash
 npm run build
 ```
 
-### Deploy to Netlify/Vercel
+3. **Deploy to GitHub Pages**:
+   - Push to GitHub
+   - Go to Repository Settings → Pages
+   - Select "GitHub Actions" or upload `dist` folder
+   - Your GPT-powered chatbot will work automatically!
+
+### Alternative: Deploy to Netlify/Vercel
 
 1. Build the project:
 ```bash
@@ -174,13 +271,10 @@ npm run build
 
 ### Environment Variables
 
-For production, consider using environment variables for EmailJS credentials:
+For production deployments:
 
 ```bash
-VITE_EMAILJS_SERVICE_ID=your_service_id
-VITE_EMAILJS_TEMPLATE_ID=your_template_id
-VITE_EMAILJS_PUBLIC_KEY=your_public_key
-```
+
 
 ## 📄 Scripts
 

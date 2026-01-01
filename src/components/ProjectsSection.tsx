@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function ProjectsSection() {
   const ref = useRef(null);
@@ -132,17 +133,18 @@ export default function ProjectsSection() {
           style={{ padding: '20x'}}
         >
           {filteredProjects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              layout
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300 ${
-                project.featured ? 'ring-2 ring-purple-400/50' : ''
-              }`}
-              whileHover={{ y: -10, scale: 1.02 }}
-            >
+            <Link key={project.id} to={`/project/${project.id}`}>
+              <motion.div
+                layout
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className={`group relative bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 hover:bg-white/20 transition-all duration-300 cursor-pointer ${
+                  project.featured ? 'ring-2 ring-purple-400/50' : ''
+                }`}
+                whileHover={{ y: -10, scale: 1.02 }}
+                style={{ margin: '10px' }}
+              >
               {/* Project Image/Icon */}
               <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 flex items-center justify-center text-6xl relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
@@ -206,7 +208,8 @@ export default function ProjectsSection() {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </motion.div>
+              </motion.div>
+            </Link>
           ))}
         </motion.div>
 
