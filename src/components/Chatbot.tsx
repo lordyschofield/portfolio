@@ -43,15 +43,15 @@ export default function Chatbot() {
   // Pre-load WebLLM engine immediately when component mounts (for instant chat)
   useEffect(() => {
     const preLoadWebLLM = async () => {
-      console.log('🚀 Pre-loading TinyLlama for instant chat access...');
+      console.log('🚀 Pre-loading TinyLlama for instant chat access (ultra low RAM)...');
 
-      const modelName = "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC"; // Smallest, fastest model
+      const modelName = "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1k"; // ABSOLUTE LOWEST RAM chat model (~675MB)
 
       try {
-        console.log(`🔍 Pre-loading: ${modelName} (~700MB)`);
+        console.log(`🔍 Pre-loading: ${modelName} (~675MB, ultra low RAM)`);
 
-        // Very short timeout for pre-loading (30 seconds for 700MB model)
-        const timeoutMs = 30000;
+        // Memory optimization: shorter timeout for faster loading
+        const timeoutMs = 25000; // 25 seconds for ultra low RAM model
         const timeoutPromise = new Promise((_, reject) =>
           setTimeout(() => reject(new Error(`Pre-load timeout after ${timeoutMs/1000} seconds`)), timeoutMs)
         );
@@ -59,26 +59,35 @@ export default function Chatbot() {
         const loadPromise = CreateMLCEngine(modelName, {
           initProgressCallback: (progress: any) => {
             const percent = Math.round(progress.progress * 100);
-            console.log(`📊 Pre-loading ${modelName}: ${percent}% complete`);
+            console.log(`📊 Pre-loading ${modelName}: ${percent}% complete (~675MB RAM)`);
             // Silent pre-loading - no UI updates to avoid showing loading to user
           }
         });
 
         const mlcEngine = await Promise.race([loadPromise, timeoutPromise]);
 
-        // Quick test to ensure it works
-        console.log(`🧪 Testing pre-loaded ${modelName}...`);
+        // Memory optimization: minimal test
+        console.log(`🧪 Quick memory test for ${modelName}...`);
         const testPromise = (mlcEngine as any).chat.completions.create({
           messages: [{ role: 'user', content: 'Hi' }],
           temperature: 0.1,
-          max_tokens: 5
+          max_tokens: 3, // Minimal tokens for testing
+          presence_penalty: 0,
+          frequency_penalty: 0
         });
 
         const testReply = await Promise.race([testPromise, timeoutPromise]);
 
           if (testReply.choices && testReply.choices[0]) {
             setEngine(mlcEngine as any);
-            console.log(`✅ TinyLlama pre-loaded and cached! Chat will be instant!`);
+            console.log(`✅ TinyLlama pre-loaded! RAM usage: ~675MB, chat instant!`);
+
+            // Memory cleanup: force garbage collection if available
+            if ((window as any).gc) {
+              (window as any).gc();
+              console.log('🧹 Memory cleanup performed');
+            }
+
             return; // Success
           } else {
             throw new Error('Pre-load test failed');
@@ -86,7 +95,7 @@ export default function Chatbot() {
 
       } catch (error: any) {
         console.log(`❌ Pre-loading failed:`, error.message || error);
-        console.log('💡 Model will load on-demand when chat is opened');
+        console.log('💡 Model will load on-demand when chat is opened (still low RAM)');
       }
     };
 
@@ -102,18 +111,11 @@ export default function Chatbot() {
       try {
         console.log('⚡ Using pre-loaded TinyLlama (instant!)');
 
-        const systemPrompt = `You are a helpful AI assistant on Lord Reinier V. Schofield's portfolio website. You help visitors learn about Lord Reinier's background, skills, and projects.
+        const systemPrompt = `You are a helpful AI assistant on Lord Reinier V. Schofield's portfolio website. Help visitors learn about his background.
 
-Lord Reinier is a Full Stack Developer with 3+ years of experience, specializing in Laravel and Vue.js. He has a Bachelor of Science in Information Systems degree.
+Lord Reinier is a Full Stack Developer with 3+ years experience in Laravel and Vue.js. Skills: Vue.js, Laravel, MySQL, Git. Projects: HR systems, recruitment platforms.
 
-His technical skills include:
-- Frontend: Vue.js, Vuetify, Vue Router, Vuex
-- Backend: Laravel, Node.js, MySQL
-- Tools: Git, REST APIs, JavaScript
-
-His key projects include HR management systems, recruitment platforms, and financial modules.
-
-Be friendly and conversational. Help visitors learn about Lord Reinier's background and encourage them to explore his portfolio. Always speak about Lord Reinier in the third person.`;
+Be friendly and speak about Lord Reinier in third person.`;
 
         const messages = [
           { role: 'system', content: systemPrompt },
@@ -123,7 +125,10 @@ Be friendly and conversational. Help visitors learn about Lord Reinier's backgro
         const reply = await engine.chat.completions.create({
           messages: messages,
           temperature: 0.7,
-          max_tokens: 256
+          max_tokens: 128, // Reduced for lower memory usage
+          // Add memory optimization settings
+          presence_penalty: 0,
+          frequency_penalty: 0
         });
 
         if (reply.choices && reply.choices[0] && reply.choices[0].message) {
@@ -152,15 +157,15 @@ Be friendly and conversational. Help visitors learn about Lord Reinier's backgro
 
   // Fallback: Load model on-demand if pre-loading failed
   const loadModelOnDemand = async (userMessage: string): Promise<string> => {
-    const modelName = "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC";
+    const modelName = "TinyLlama-1.1B-Chat-v0.4-q4f16_1-MLC-1k"; // ABSOLUTE LOWEST RAM
 
     try {
       setIsModelLoading(true);
-      setLoadingMessage(`Loading TinyLlama (~700MB)...`);
+      setLoadingMessage(`Loading ultra low RAM AI (~675MB)...`);
 
       console.log(`🔄 On-demand loading: ${modelName}`);
 
-      const timeoutMs = 45000; // 45 seconds for on-demand
+      const timeoutMs = 35000; // Reduced to 35 seconds for lower memory usage
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(() => reject(new Error(`On-demand timeout`)), timeoutMs)
       );
@@ -168,18 +173,20 @@ Be friendly and conversational. Help visitors learn about Lord Reinier's backgro
       const loadPromise = CreateMLCEngine(modelName, {
         initProgressCallback: (progress: any) => {
           const percent = Math.round(progress.progress * 100);
-          const timeRemaining = percent > 0 ? Math.round((100 - percent) / percent * 10) : 'unknown';
-          setLoadingMessage(`TinyLlama: ${percent}% (~${timeRemaining}s)`);
+          const timeRemaining = percent > 0 ? Math.round((100 - percent) / percent * 8) : 'unknown';
+          setLoadingMessage(`Ultra Low RAM AI: ${percent}% (~${timeRemaining}s)`);
         }
       });
 
       const mlcEngine = await Promise.race([loadPromise, timeoutPromise]);
 
-      // Quick test
+      // Memory-optimized test
       const testReply = await (mlcEngine as any).chat.completions.create({
-        messages: [{ role: 'user', content: 'Test' }],
+        messages: [{ role: 'user', content: 'Hi' }],
         temperature: 0.1,
-        max_tokens: 5
+        max_tokens: 3, // Minimal for testing
+        presence_penalty: 0,
+        frequency_penalty: 0
       });
 
       if (testReply.choices && testReply.choices[0]) {

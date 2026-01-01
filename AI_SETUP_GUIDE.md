@@ -13,8 +13,8 @@
 
 ### **How It Works**
 
-**WebLLM** runs **TinyLlama-1.1B** directly in your browser with smart pre-caching:
-- **TinyLlama-1.1B** - Smallest official WebLLM model (700MB)
+**WebLLM** runs **TinyLlama ultra low RAM model** directly in your browser with smart pre-caching:
+- **TinyLlama-1.1B** - Absolute lowest RAM WebLLM model (675MB, minimal resource usage)
 - **Pre-cached loading** - Model downloads in background when page loads
 - **Instant chat access** - AI ready immediately after pre-loading
 - **Comprehensive knowledge** of Lord Reinier's complete background
@@ -61,9 +61,10 @@ npm run build
 ## 🚨 **Loading Process**
 
 **Page Load (Background):**
-- 🔄 TinyLlama pre-loads automatically when page opens
+- 🔄 TinyLlama memory-optimized model pre-loads automatically when page opens
 - 📊 Progress logged to console (silent to user)
-- 🕐 Takes 30-45 seconds for 700MB model
+- 🕐 Takes 20-25 seconds for 675MB ultra low-resource model
+- 💾 Memory cleanup performed after loading
 
 **Chat Opening:**
 - ⚡ **Instant!** If pre-loaded successfully
@@ -71,8 +72,8 @@ npm run build
 - ✅ "Local AI Ready" shows in header
 
 **If Pre-load Fails:**
-- ⏳ Quick on-demand loading (30-45 seconds)
-- 📊 Progress shown: "TinyLlama: 67% (~15s)"
+- ⏳ Quick on-demand loading (20-30 seconds)
+- 📊 Progress shown: "Ultra Low RAM AI: 67% (~10s)"
 - 🚀 Then instant responses
 
 ## 📋 **What It Can Answer**

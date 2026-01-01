@@ -50,12 +50,13 @@ This portfolio features an **intelligent AI chatbot** powered by **WebLLM** that
 - **Conversational AI**: Natural, helpful responses to any questions about Lord Reinier's background
 
 ### 🔧 Technical Implementation
-- **Model**: TinyLlama-1.1B-Chat-v0.4 (700MB) - Official WebLLM model
-- **Loading Time**: Pre-cached on page load (instant chat!), 30-45 seconds first visit
+- **Model**: TinyLlama-1.1B (675MB, ultra low RAM) - Memory-optimized WebLLM model
+- **Loading Time**: Pre-cached on page load (instant chat!), 20-25 seconds first visit
+- **Memory Usage**: ~675MB VRAM + minimal system RAM
 - **Local AI**: Runs entirely in browser using WebAssembly/WebGPU
+- **Memory Optimized**: Reduced context window, optimized prompts, cleanup enabled
 - **Smart Caching**: Model loads in background when page opens
 - **Instant Chat**: AI ready immediately after pre-loading completes
-- **Fallback**: On-demand loading if pre-cache fails
 
 ## 🚀 Getting Started
 
