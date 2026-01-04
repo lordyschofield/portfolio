@@ -8,7 +8,6 @@ import ProjectsSection from './components/ProjectsSection';
 import ContactSection from './components/ContactSection';
 import ProjectDetail from './components/ProjectDetail';
 import Navigation from './components/Navigation';
-import Chatbot from './components/Chatbot';
 
 // Main Portfolio Component (without router)
 function Portfolio() {
@@ -82,8 +81,6 @@ function Portfolio() {
         <ContactSection />
       </main>
 
-      {/* Chatbot */}
-      <Chatbot />
 
       {/* Floating Elements */}
       <div className="fixed inset-0 pointer-events-none -z-10">

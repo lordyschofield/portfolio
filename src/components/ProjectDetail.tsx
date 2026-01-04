@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github, Calendar, Code, Users } from 'lucide-react';
 import { useEffect } from 'react';
-import Chatbot from './Chatbot';
 
 interface Project {
   id: number;
@@ -442,8 +441,6 @@ export default function ProjectDetail() {
         </div>
       </section>
 
-      {/* Chatbot */}
-      <Chatbot />
     </div>
   );
 }
